@@ -1,0 +1,55 @@
+h1 {
+    text-align: center;
+    font-size: 50px;
+}
+
+#game-board {
+    margin: auto;
+    display: grid;
+    width: 75vh;
+    height: 75vh;
+    border: 1px solid black;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.cell {
+    background-color: lightgray;
+    border: solid;
+}
+
+#one {
+    border-top: none;
+    border-left: none;
+}
+
+#two {
+    border-top: none;
+}
+
+#three {
+    border-top: none;
+    border-right: none;
+}
+
+#four {
+    border-left: none;
+}
+
+#six {
+    border-right: none;
+}
+
+#seven {
+    border-left: none;
+    border-bottom: none;
+}
+
+#eight {
+    border-bottom: none;
+}
+
+#nine {
+    border-bottom: none;
+    border-right: none;
+}
