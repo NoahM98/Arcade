@@ -1,6 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 h1 {
     text-align: center;
     font-size: 50px;
+}
+
+select {
+    margin-bottom: 20px;
 }
 
 #game-board {
@@ -9,47 +25,52 @@ h1 {
     width: 75vh;
     height: 75vh;
     border: 1px solid black;
-    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .cell {
     background-color: lightgray;
     border: solid;
+    font-size: 1000%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#one {
+#index00 {
     border-top: none;
     border-left: none;
 }
 
-#two {
+#index01 {
     border-top: none;
 }
 
-#three {
+#index02 {
     border-top: none;
     border-right: none;
 }
 
-#four {
+#index10 {
     border-left: none;
 }
 
-#six {
+#index12 {
     border-right: none;
 }
 
-#seven {
+#index20 {
     border-left: none;
     border-bottom: none;
 }
 
-#eight {
+#index21 {
     border-bottom: none;
 }
 
-#nine {
+#index22 {
     border-bottom: none;
     border-right: none;
 }
