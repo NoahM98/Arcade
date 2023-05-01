@@ -8,11 +8,13 @@ let state = {
     ]
 }
 
-let currentPlayer = state.player1;
+let currentPlayer;
 
+const playerBoxOne = document.getElementById('playerBox1');
 const playerOne = document.getElementById('player-one');
 const playerNameOne = document.createElement('h2');
 
+const playerBoxTwo = document.getElementById('playerBox2');
 const playerTwo = document.getElementById('player-two');
 const playerNameTwo = document.createElement('h2');
 
@@ -32,6 +34,15 @@ function buildInitialState() {
     }
 }
 
+function decideWhoseFirst() {
+    let decision = Math.floor(Math.random() * 2) + 1;
+    if (decision === 1) {
+        currentPlayer = state.player1;
+    } else if (decision === 2) {
+        currentPlayer = state.player2;
+    }
+}
+
 function renderState() {
     const cellValue = document.createElement('div');
     cellValue.innerText = currentPlayer;
@@ -43,7 +54,6 @@ function updateBoard() {
     state.board[target.id[5]].splice(target.id[6], 1, currentPlayer);
 }
 
-let hasEnded = false;
 function checkWinConditions() {
     let board = state.board;
     let draw;
@@ -67,9 +77,9 @@ function checkWinConditions() {
         (board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[0][2] !== null)) {
 
         hasEnded = true;
-        if (currentPlayer === 'x') {
+        if (currentPlayer === state.player1) {
             gameOverPopup.innerText = playerNameOne.innerText + ' has won!';
-        } else if (currentPlayer === 'o') {
+        } else if (currentPlayer === state.player2) {
             gameOverPopup.innerText = playerNameTwo.innerText + ' has won!';
         }
         gameOverPopup.style.display = 'inline-block';
@@ -82,8 +92,15 @@ function checkWinConditions() {
     }
 }
 
-// highlight current player ******************
-// clearly who has won or if it was a draw ******************
+function highlightPlayer() {
+    if (currentPlayer === state.player1) {
+        playerBoxOne.classList.add('highlight');
+        playerBoxTwo.classList.remove('highlight');
+    } else if (currentPlayer === state.player2) {
+        playerBoxOne.classList.remove('highlight');
+        playerBoxTwo.classList.add('highlight');
+    }
+}
 
 // listeners
 let isOnePlayer = true;
@@ -98,9 +115,12 @@ const selectPlayers = document.getElementById('oneP-twoP');
 selectPlayers.addEventListener('change', numOfPlayers)
 
 let hasStarted = false;
+let hasEnded = false;
 function onStart() {
     // have the computer choose randomly who goes first *****************
     buildInitialState();
+    decideWhoseFirst();
+    highlightPlayer();
     hasStarted = true;
 }
 const startButton = document.getElementById('start');
@@ -119,11 +139,12 @@ function onBoardClick(event) {
         renderState();
         updateBoard();
         checkWinConditions();
-        if (currentPlayer === state.player1) {
+        if (currentPlayer === state.player1 && !hasEnded) {
             currentPlayer = state.player2;
-        } else if (currentPlayer === state.player2) {
+        } else if (currentPlayer === state.player2 && !hasEnded) {
             currentPlayer = state.player1;
         }
+        highlightPlayer();
     }
 }
 const board = document.getElementById('game-board');

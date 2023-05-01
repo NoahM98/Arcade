@@ -8,6 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: skyblue;
 }
 
 h1 {
@@ -43,11 +44,16 @@ h1 {
 .playerAndName {
     display: flex;
     justify-content: center;
+    padding: 5px;
 }
 
 #player-one,
 #player-two {
     margin-right: 20px;
+}
+
+.highlight {
+    border: 2px solid red;
 }
 
 #game-over {
@@ -75,7 +81,7 @@ h1 {
 }
 
 .cell {
-    background-color: lightgray;
+    background-color: white;
     border: solid;
     font-size: 1000%;
     font-weight: bold;
