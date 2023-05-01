@@ -10,11 +10,15 @@ let state = {
 
 let currentPlayer = state.player1;
 
+const playerOne = document.getElementById('player-one');
+const playerNameOne = document.createElement('h2');
+
+const playerTwo = document.getElementById('player-two');
+const playerNameTwo = document.createElement('h2');
+
+const gameOverPopup = document.getElementById('game-over')
+
 function buildInitialState() {
-    const playerOne = document.getElementById('player-one');
-    const playerNameOne = document.createElement('h2');
-    const playerTwo = document.getElementById('player-two');
-    const playerNameTwo = document.createElement('h2');
     if (isOnePlayer) {
         playerNameOne.innerText = prompt('Please enter your name');
         playerOne.after(playerNameOne);
@@ -39,6 +43,7 @@ function updateBoard() {
     state.board[target.id[5]].splice(target.id[6], 1, currentPlayer);
 }
 
+let hasEnded = false;
 function checkWinConditions() {
     let board = state.board;
     let draw;
@@ -61,9 +66,19 @@ function checkWinConditions() {
         (board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[0][0] !== null) ||
         (board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[0][2] !== null)) {
 
-        console.log(`Player ${currentPlayer} wins!`);
+        hasEnded = true;
+        if (currentPlayer === 'x') {
+            gameOverPopup.innerText = playerNameOne.innerText + ' has won!';
+        } else if (currentPlayer === 'o') {
+            gameOverPopup.innerText = playerNameTwo.innerText + ' has won!';
+        }
+        gameOverPopup.style.display = 'inline-block';
+
     } else if (draw && !notDraw) {
         console.log("It's a draw!");
+        hasEnded = true;
+        gameOverPopup.innerText = "It's a draw!";
+        gameOverPopup.style.display = 'inline-block';
     }
 }
 
@@ -82,9 +97,11 @@ function numOfPlayers(event) {
 const selectPlayers = document.getElementById('oneP-twoP');
 selectPlayers.addEventListener('change', numOfPlayers)
 
+let hasStarted = false;
 function onStart() {
     // have the computer choose randomly who goes first *****************
     buildInitialState();
+    hasStarted = true;
 }
 const startButton = document.getElementById('start');
 startButton.addEventListener('click', onStart);
@@ -98,7 +115,7 @@ const resetButton = document.getElementById('reset');
 function onBoardClick(event) {
     // add a way for the computer to either randomly or intelligently choose where to place their mark *******************
     target = event.target;
-    if (target.matches('.cell') && target.innerText === '') {
+    if (target.matches('.cell') && target.innerText === '' && hasStarted && !hasEnded) {
         renderState();
         updateBoard();
         checkWinConditions();

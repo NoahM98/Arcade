@@ -13,6 +13,7 @@ body {
 h1 {
     text-align: center;
     font-size: 50px;
+    margin: 10px;
 }
 
 #oneP-twoP {
@@ -47,6 +48,19 @@ h1 {
 #player-one,
 #player-two {
     margin-right: 20px;
+}
+
+#game-over {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 30vh;
+    font-size: 40px;
+    background-color: white;
+    border: solid;
+    text-align: center;
+    padding: 10px;
+    top: 20vh;
 }
 
 #game-board {
