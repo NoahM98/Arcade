@@ -10,10 +10,22 @@
 </head>
 <body>
     <h1>Tic Tac Toe</h1>
-    <select>
+    <select id="oneP-twoP">
         <option value="1-player">1 Player</option>
         <option value="2-player">2 Player</option>
     </select>
+    <div>
+        <button id="start">Start</button>
+        <button id="reset">Reset</button>
+    </div>
+    <div id="players">
+        <div class="playerAndName">
+            <h2 id="player-one">X:</h2>
+        </div>
+        <div class="playerAndName">
+            <h2 id="player-two">O:</h2>
+        </div>
+    </div>
     <section id="game-board">
         <div class="cell" id="index00"></div>
         <div class="cell" id="index01"></div>

@@ -15,12 +15,43 @@ h1 {
     font-size: 50px;
 }
 
-select {
+#oneP-twoP {
     margin-bottom: 20px;
+    font-size: 20px;
+}
+
+#start {
+    margin-bottom: 20px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+#reset {
+    margin-bottom: 20px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+#players {
+    display: flex;
+    justify-content: space-between;
+    width: 50vh;
+    margin-bottom: 20px;
+}
+
+.playerAndName {
+    display: flex;
+    justify-content: center;
+}
+
+#player-one,
+#player-two {
+    margin-right: 20px;
 }
 
 #game-board {
     margin: auto;
+    margin-bottom: 20px;
     display: grid;
     width: 75vh;
     height: 75vh;
