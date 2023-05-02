@@ -10,6 +10,8 @@ let state = {
 
 let currentPlayer;
 
+const select = document.getElementById('oneP-twoP');
+
 const playerBoxOne = document.getElementById('playerBox1');
 const playerOne = document.getElementById('player-one');
 const playerNameOne = document.createElement('h2');
@@ -52,6 +54,22 @@ function renderState() {
 
 function updateBoard() {
     state.board[target.id[5]].splice(target.id[6], 1, currentPlayer);
+}
+
+function haveComputerPlay() {
+    let firstIndex = Math.floor(Math.random() * 3);
+    let secondIndex = Math.floor(Math.random() * 3);
+    while (state.board[firstIndex][secondIndex]) {
+        firstIndex = Math.floor(Math.random() * 3);
+        secondIndex = Math.floor(Math.random() * 3);
+    }
+    state.board[firstIndex].splice([secondIndex], 1, currentPlayer);
+    const cellValue = document.createElement('div');
+    cellValue.innerText = currentPlayer;
+    const computerChoice = document.getElementById('index' + firstIndex + secondIndex);
+    computerChoice.appendChild(cellValue);
+    currentPlayer = state.player1;
+    highlightPlayer();
 }
 
 function checkWinConditions() {
@@ -103,6 +121,7 @@ function highlightPlayer() {
 }
 
 // listeners
+
 let isOnePlayer = true;
 function numOfPlayers(event) {
     if (event.target.value === '1-player') {
@@ -117,25 +136,52 @@ selectPlayers.addEventListener('change', numOfPlayers)
 let hasStarted = false;
 let hasEnded = false;
 function onStart() {
-    // have the computer choose randomly who goes first *****************
-    buildInitialState();
-    decideWhoseFirst();
-    highlightPlayer();
-    hasStarted = true;
+    if (!hasStarted) {
+        buildInitialState();
+        decideWhoseFirst();
+        highlightPlayer();
+        hasStarted = true;
+        if (isOnePlayer && currentPlayer === state.player2) {
+            setTimeout(haveComputerPlay, 1000);
+        }
+    }
 }
 const startButton = document.getElementById('start');
 startButton.addEventListener('click', onStart);
 
 function onReset() {
     // have a way to reset when the reset button is clicked
+    if (hasStarted) {
+        for (let i = 0; i < state.board.length; i++) {
+            for (let j = 0; j < state.board[i].length; j++) {
+                state.board[i].splice(j, 1, null);
+                let currentCell = document.getElementById('index' + i + j);
+                if (currentCell.firstChild) {
+                    currentCell.removeChild(currentCell.firstChild);
+                }
+            }
+        }
+        gameOverPopup.innerText = '';
+        gameOverPopup.style.display = 'none';
+        if (currentPlayer === state.player1) {
+            playerBoxOne.classList.remove('highlight');
+        } else if (currentPlayer === state.player2) {
+            playerBoxTwo.classList.remove('highlight');
+        }
+        playerBoxOne.removeChild(playerBoxOne.children[1]);
+        playerBoxTwo.removeChild(playerBoxTwo.children[1]);
+        select.value = '1-player';
+        hasStarted = false;
+        hasEnded = false;
+        isOnePlayer = true;
+    }
 }
 const resetButton = document.getElementById('reset');
-// resetButton.addEventListener('click',)
+resetButton.addEventListener('click', onReset);
 
 function onBoardClick(event) {
-    // add a way for the computer to either randomly or intelligently choose where to place their mark *******************
     target = event.target;
-    if (target.matches('.cell') && target.innerText === '' && hasStarted && !hasEnded) {
+    if (target.matches('.cell') && target.innerText === '' && hasStarted && !hasEnded && ((isOnePlayer && currentPlayer !== state.player2) || !isOnePlayer)) {
         renderState();
         updateBoard();
         checkWinConditions();
@@ -145,6 +191,9 @@ function onBoardClick(event) {
             currentPlayer = state.player1;
         }
         highlightPlayer();
+        if (isOnePlayer && !hasEnded) {
+            setTimeout(haveComputerPlay, 1000);
+        }
     }
 }
 const board = document.getElementById('game-board');
