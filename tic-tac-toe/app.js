@@ -68,8 +68,11 @@ function haveComputerPlay() {
     cellValue.innerText = currentPlayer;
     const computerChoice = document.getElementById('index' + firstIndex + secondIndex);
     computerChoice.appendChild(cellValue);
-    currentPlayer = state.player1;
-    highlightPlayer();
+    checkWinConditions();
+    if (!hasEnded) {
+        currentPlayer = state.player1;
+        highlightPlayer();
+    }
 }
 
 function checkWinConditions() {
@@ -190,7 +193,9 @@ function onBoardClick(event) {
         } else if (currentPlayer === state.player2 && !hasEnded) {
             currentPlayer = state.player1;
         }
-        highlightPlayer();
+        if (!hasEnded) {
+            highlightPlayer();
+        }
         if (isOnePlayer && !hasEnded) {
             setTimeout(haveComputerPlay, 1000);
         }
