@@ -35,3 +35,8 @@ h1 {
 .snakeBody {
     background-color: green;
 }
+
+.apple {
+    background-color: red;
+    border-radius: 50%;
+}
