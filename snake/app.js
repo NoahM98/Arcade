@@ -64,7 +64,11 @@ function moveSnake() {
 
 let hasStarted = false;
 function startGame() {
-    hasStarted = true;
+    if (!hasStarted) {
+        hasStarted = true;
+    } else if (hasStarted) {
+        hasStarted = false;
+    }
 }
 startButton.addEventListener('click', startGame);
 
@@ -85,10 +89,21 @@ function tick() {
 }
 
 
-setInterval(tick, 1000) // as close to 30 frames per second as possible
+setInterval(tick, 250) // as close to 30 frames per second as possible
 
-
-// now you might have things like
-document.addEventListener('keydown', function (event) {
-    // here you might read which key was pressed and update the state accordingly
-})
+function arrowDown(event) {
+    if (event.key === 'ArrowUp') {
+        snake.nextDirection = [-1, 0];
+        console.log('up arrow pressed');
+    } else if (event.key === 'ArrowDown') {
+        snake.nextDirection = [1, 0];
+        console.log('down arrow pressed');
+    } else if (event.key === 'ArrowLeft') {
+        snake.nextDirection = [0, -1];
+        console.log('left arrow pressed');
+    } else if (event.key === 'ArrowRight') {
+        snake.nextDirection = [0, 1];
+        console.log('right arrow pressed');
+    }
+}
+document.addEventListener('keydown', arrowDown);
