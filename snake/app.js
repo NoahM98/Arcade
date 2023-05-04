@@ -1,5 +1,5 @@
 let snake = {
-    body: [[10, 5], [10, 6], [10, 7], [10, 8]],
+    body: [[10, 5], [10, 6], [10, 7], [10, 8], [10, 9]],
     nextDirection: [0, 1]
 };
 
@@ -101,9 +101,30 @@ function moveSnake() {
     return removedCell;
 }
 
+function checkForSelfHit(el, ind) {
+    let head = snake.body[snake.body.length - 1];
+    if (el[0] === head[0] && el[1] === head[1] && ind !== snake.body.length - 1) {
+        hasHitItself = true;
+        console.log(hasHitItself);
+    }
+}
+
+function hasGameEnded() {
+    let body = snake.body;
+    let head = body.length - 1;
+    body.forEach(checkForSelfHit);
+    if (body[head][0] >= 20 || body[head][1] >= 20 ||
+        body[head][0] < 0 || body[head][1] < 0 || hasHitItself) {
+        console.log('Game Over');
+        hasEnded = true;
+    }
+}
+
 // listeners
 
 let hasStarted = false;
+let hasEnded = false;
+let hasHitItself = false;
 function startGame() {
     if (!hasStarted) {
         hasStarted = true;
@@ -123,9 +144,12 @@ startButton.addEventListener('click', startGame);
 
 function tick() {
     // this is an incremental change that happens to the state every time you update...
-    if (hasStarted) {
+    if (hasStarted && !hasEnded) {
         let removedClass = moveSnake();
-        renderState(removedClass);
+        hasGameEnded();
+        if (!hasEnded) {
+            renderState(removedClass);
+        }
     }
 }
 
