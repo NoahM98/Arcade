@@ -9,7 +9,8 @@ let state = {
 };
 
 const board = document.getElementById('board');
-const startButton = document.getElementById('gameStart');
+const startButton = document.getElementById('game-start');
+const scoreDisplay = document.getElementById('score-display');
 
 // creating the board
 function makeBoard() {
@@ -47,7 +48,6 @@ function newSnakeBody(el) {
     } else {
         snakeCell = document.getElementById('index' + el[0] + el[1]);
     }
-    console.log(snakeCell);
     snakeCell.classList.add('snakeBody');
 }
 
@@ -55,7 +55,6 @@ function renderState(removed) {
     // show the user the new state
     snake.body.forEach(newSnakeBody);
     if (removed) {
-        console.log(removed);
         let oldCell;
         if (removed[0] < 10 && removed[1] < 10) {
             oldCell = document.getElementById('index' + '0' + removed[0] + '0' + removed[1]);
@@ -82,7 +81,6 @@ function renderApple() {
     } else {
         newApple = document.getElementById('index' + apl[0] + apl[1]);
     }
-    console.log(newApple);
     newApple.classList.add('apple');
 }
 
@@ -101,11 +99,60 @@ function moveSnake() {
     return removedCell;
 }
 
+function newAppleCheck(el) {
+    if (el[0] === appleX && el[1] === appleY) {
+        appleError = true;
+    } else {
+        appleError = false;
+    }
+}
+
+function moveApple() {
+    appleX = Math.floor(Math.random() * 20);
+    appleY = Math.floor(Math.random() * 20);
+    snake.body.forEach(newAppleCheck);
+    while (appleError) {
+        appleX = Math.floor(Math.random() * 20);
+        appleY = Math.floor(Math.random() * 20);
+        snake.body.forEach(newAppleCheck);
+        console.log(appleX);
+        console.log(appleY);
+    }
+    appleError = false;
+    state.apple = [appleX, appleY];
+}
+
+function removeAppleClass() {
+    let apl = state.apple;
+    let oldApple;
+    if (apl[0] < 10 && apl[1] < 10) {
+        oldApple = document.getElementById('index' + '0' + apl[0] + '0' + apl[1]);
+    } else if (apl[0] < 10) {
+        oldApple = document.getElementById('index' + '0' + apl[0] + apl[1]);
+    } else if (apl[1] < 10) {
+        oldApple = document.getElementById('index' + apl[0] + '0' + apl[1]);
+    } else {
+        oldApple = document.getElementById('index' + apl[0] + apl[1]);
+    }
+    oldApple.classList.remove('apple');
+}
+
+function hasEatenApple() {
+    let head = snake.body[snake.body.length - 1];
+    if (head[0] === state.apple[0] && head[1] === state.apple[1]) {
+        snake.body.unshift(lastRemoved);
+        appleEaten = true;
+        score++;
+        scoreDisplay.innerText = `Score: ${score}`;
+        removeAppleClass();
+        moveApple();
+    }
+}
+
 function checkForSelfHit(el, ind) {
     let head = snake.body[snake.body.length - 1];
     if (el[0] === head[0] && el[1] === head[1] && ind !== snake.body.length - 1) {
         hasHitItself = true;
-        console.log(hasHitItself);
     }
 }
 
@@ -125,6 +172,12 @@ function hasGameEnded() {
 let hasStarted = false;
 let hasEnded = false;
 let hasHitItself = false;
+let score = 0;
+let lastRemoved;
+let appleEaten = false;
+let appleError = false;
+let appleX;
+let appleY;
 function startGame() {
     if (!hasStarted) {
         hasStarted = true;
@@ -145,16 +198,22 @@ startButton.addEventListener('click', startGame);
 function tick() {
     // this is an incremental change that happens to the state every time you update...
     if (hasStarted && !hasEnded) {
-        let removedClass = moveSnake();
+        lastRemoved = moveSnake();
         hasGameEnded();
-        if (!hasEnded) {
-            renderState(removedClass);
+        hasEatenApple();
+        if (!hasEnded && appleEaten) {
+            renderState();
+            renderApple();
+            appleEaten = false;
+        } else if (!hasEnded) {
+            renderState(lastRemoved);
+            renderApple();
         }
     }
 }
 
 
-setInterval(tick, 250) // as close to 30 frames per second as possible
+setInterval(tick, 200) // as close to 30 frames per second as possible
 
 function arrowDown(event) {
     if (event.key === 'ArrowUp') {
