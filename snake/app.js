@@ -8,6 +8,16 @@ let state = {
     snake: snake
 };
 
+let hasStarted = false;
+let hasEnded = false;
+let hasHitItself = false;
+let score = 0;
+let lastRemoved;
+let appleEaten = false;
+let appleError = false;
+let appleX;
+let appleY;
+
 const board = document.getElementById('board');
 const startButton = document.getElementById('game-start');
 const scoreDisplay = document.getElementById('score-display');
@@ -169,15 +179,6 @@ function hasGameEnded() {
 
 // listeners
 
-let hasStarted = false;
-let hasEnded = false;
-let hasHitItself = false;
-let score = 0;
-let lastRemoved;
-let appleEaten = false;
-let appleError = false;
-let appleX;
-let appleY;
 function startGame() {
     if (!hasStarted) {
         hasStarted = true;
@@ -186,14 +187,6 @@ function startGame() {
     }
 }
 startButton.addEventListener('click', startGame);
-
-// Don't know if I need this yet...
-// function onBoardClick() {
-//     // update state, maybe with another dozen or so helper functions...
-
-//     renderState()
-// }
-// board.addEventListener('click', onBoardClick);
 
 function tick() {
     // this is an incremental change that happens to the state every time you update...
