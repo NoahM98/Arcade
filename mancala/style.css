@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: red;
+    width: 100vw;
+    height: 100vh;
+}
+
+h1 {
+    margin: 10px;
+    font-size: 50px;
+}
+
+#game-board {
+    margin-top: 10vh;
+    width: 80vw;
+    height: 60vh;
+    background-color: burlywood;
+    border-radius: 5%;
+    display: grid;
+    grid-template-columns: 1.5fr 6fr 1.5fr;
+}
+
+.mancalas {
+    background-color: #966F33;
+    margin: 20px;
+    border-radius: 50%;
+}
+
+#player-cups {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.cup {
+    background-color: #966F33;
+    border-radius: 50%;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 10px;
+}
+
+.gem-cell {
+    background-color: black;
+    border: 0.5px solid white;
+}
+
+.gem {
+    background: red;
+    border-radius: 50%;
+}
