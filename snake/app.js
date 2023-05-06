@@ -15,12 +15,17 @@ let score = 0;
 let lastRemoved;
 let appleEaten = false;
 let appleError = false;
-let appleX;
-let appleY;
+let appleX = state.apple[0];
+let appleY = state.apple[1];
+let highScore = 0;
+let difficulty = 250;
 
 const board = document.getElementById('board');
 const startButton = document.getElementById('game-start');
+const gameDifficulty = document.getElementById('game-difficulty');
 const scoreDisplay = document.getElementById('score-display');
+const highScoreDisplay = document.getElementById('high-score-display');
+const gameOverPopup = document.getElementById('game-over');
 
 // creating the board
 function makeBoard() {
@@ -112,8 +117,7 @@ function moveSnake() {
 function newAppleCheck(el) {
     if (el[0] === appleX && el[1] === appleY) {
         appleError = true;
-    } else {
-        appleError = false;
+        console.log('Apple Error: ' + appleError);
     }
 }
 
@@ -122,11 +126,10 @@ function moveApple() {
     appleY = Math.floor(Math.random() * 20);
     snake.body.forEach(newAppleCheck);
     while (appleError) {
+        appleError = false;
         appleX = Math.floor(Math.random() * 20);
         appleY = Math.floor(Math.random() * 20);
         snake.body.forEach(newAppleCheck);
-        console.log(appleX);
-        console.log(appleY);
     }
     appleError = false;
     state.apple = [appleX, appleY];
@@ -154,6 +157,10 @@ function hasEatenApple() {
         appleEaten = true;
         score++;
         scoreDisplay.innerText = `Score: ${score}`;
+        if (score > highScore) {
+            highScore = score;
+            highScoreDisplay.innerText = `High Score: ${highScore}`;
+        }
         removeAppleClass();
         moveApple();
     }
@@ -173,6 +180,7 @@ function hasGameEnded() {
     if (body[head][0] >= 20 || body[head][1] >= 20 ||
         body[head][0] < 0 || body[head][1] < 0 || hasHitItself) {
         console.log('Game Over');
+        gameOverPopup.style.display = 'inline-block';
         hasEnded = true;
     }
 }
@@ -181,12 +189,24 @@ function hasGameEnded() {
 
 function startGame() {
     if (!hasStarted) {
-        hasStarted = true;
-    } else if (hasStarted) {
-        hasStarted = false;
+        setInterval(tick, difficulty);
     }
+    hasStarted = true;
 }
 startButton.addEventListener('click', startGame);
+
+function changeDifficulty(event) {
+    if (event.target.value === 'easy') {
+        difficulty = 250;
+    } else if (event.target.value === 'medium') {
+        difficulty = 200;
+    } else if (event.target.value === 'hard') {
+        difficulty = 150;
+    } else if (event.target.value === 'expert') {
+        difficulty = 100;
+    }
+}
+gameDifficulty.addEventListener('change', changeDifficulty);
 
 function tick() {
     // this is an incremental change that happens to the state every time you update...
@@ -204,9 +224,6 @@ function tick() {
         }
     }
 }
-
-
-setInterval(tick, 200) // as close to 30 frames per second as possible
 
 function arrowDown(event) {
     if (event.key === 'ArrowUp') {

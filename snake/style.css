@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: monospace;
 }
 
 body {
@@ -16,21 +17,33 @@ h1 {
     font-size: 50px;
 }
 
-#game-start {
+.game-buttons {
     font-size: 20px;
     margin: 10px;
     padding: 5px;
 }
 
-#score-display {
-    margin-top: 10px;
-    margin-bottom: 20px;
+.scores {
+    margin: 20px;
     font-size: 25px;
+    display: inline-block;
+}
+
+#game-over {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    font-size: 50px;
+    background-color: white;
+    border: solid;
+    text-align: center;
+    padding: 20px;
+    top: 30vh;
 }
 
 #board {
-    width: 75vh;
-    height: 75vh;
+    width: 70vh;
+    height: 70vh;
     background-color: black;
 }
 

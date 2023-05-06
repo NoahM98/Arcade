@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
+    font-family: monospace;
 }
 
 body {
@@ -39,11 +40,11 @@ li {
 }
 
 #mancala {
-    color: yellow;
+    color: red;
 }
 
 #connect-four {
-    color: red;
+    color: purple;
 }
 
 a:hover {

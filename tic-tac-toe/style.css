@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: monospace;
 }
 
 body {
@@ -38,7 +39,8 @@ h1 {
     display: flex;
     justify-content: space-between;
     width: 50vh;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    font-size: 20px;
 }
 
 .playerAndName {
@@ -73,11 +75,12 @@ h1 {
     margin: auto;
     margin-bottom: 20px;
     display: grid;
-    width: 75vh;
-    height: 75vh;
-    border: 1px solid black;
+    width: 60vh;
+    height: 60vh;
+    /* border: 1px solid black; */
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
+    border-radius: 15%;
 }
 
 .cell {
@@ -93,6 +96,7 @@ h1 {
 #index00 {
     border-top: none;
     border-left: none;
+    border-top-left-radius: 15%;
 }
 
 #index01 {
@@ -102,6 +106,7 @@ h1 {
 #index02 {
     border-top: none;
     border-right: none;
+    border-top-right-radius: 15%;
 }
 
 #index10 {
@@ -115,6 +120,7 @@ h1 {
 #index20 {
     border-left: none;
     border-bottom: none;
+    border-bottom-left-radius: 15%;
 }
 
 #index21 {
@@ -124,4 +130,5 @@ h1 {
 #index22 {
     border-bottom: none;
     border-right: none;
+    border-bottom-right-radius: 15%;
 }
