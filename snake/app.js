@@ -55,7 +55,6 @@ function makeBoard() {
 }
 makeBoard();
 
-let num = 1;
 function newSnakeBody(el, ind) {
     let snakeCell;
     if (el[0] < 10 && el[1] < 10) {
@@ -70,9 +69,6 @@ function newSnakeBody(el, ind) {
     if (!hasReset) {
         snakeCell.classList.add('snakeBody');
     } else if (hasReset && ind !== snake.body.length - 1) {
-        console.log(num);
-        num++;
-        console.log(snakeCell);
         snakeCell.classList.remove('snakeBody');
     }
 }
@@ -190,7 +186,6 @@ function hasGameEnded() {
     body.forEach(checkForSelfHit);
     if (body[head][0] >= 20 || body[head][1] >= 20 ||
         body[head][0] < 0 || body[head][1] < 0 || hasHitItself) {
-        console.log('Game Over');
         gameOverPopup.style.display = 'inline-block';
         hasEnded = true;
     }
@@ -215,7 +210,6 @@ function resetGame() {
     scoreDisplay.innerText = `Score: ${score}`;
     difficulty = 250;
     clearInterval(movement);
-    console.log(snake.body);
     snake.body.forEach(newSnakeBody);
     removeAppleClass();
     snake.body = [[10, 5], [10, 6], [10, 7], [10, 8], [10, 9]];
@@ -262,16 +256,12 @@ function tick() {
 function arrowDown(event) {
     if (event.key === 'ArrowUp') {
         snake.nextDirection = [-1, 0];
-        console.log('up arrow pressed');
     } else if (event.key === 'ArrowDown') {
         snake.nextDirection = [1, 0];
-        console.log('down arrow pressed');
     } else if (event.key === 'ArrowLeft') {
         snake.nextDirection = [0, -1];
-        console.log('left arrow pressed');
     } else if (event.key === 'ArrowRight') {
         snake.nextDirection = [0, 1];
-        console.log('right arrow pressed');
     }
 }
 document.addEventListener('keydown', arrowDown);

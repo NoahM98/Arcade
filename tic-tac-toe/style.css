@@ -35,6 +35,12 @@ h1 {
     font-size: 20px;
 }
 
+button,
+select {
+    border-radius: 15%;
+    border: 1px solid black;
+}
+
 #players {
     display: flex;
     justify-content: space-between;
@@ -77,10 +83,10 @@ h1 {
     display: grid;
     width: 60vh;
     height: 60vh;
-    /* border: 1px solid black; */
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     border-radius: 15%;
+    /* box-shadow: 0 0 10px 1px black; */
 }
 
 .cell {
@@ -97,38 +103,46 @@ h1 {
     border-top: none;
     border-left: none;
     border-top-left-radius: 15%;
+    box-shadow: 0 0 10px 1px black;
 }
 
 #index01 {
     border-top: none;
+    box-shadow: 0 0 10px 1px black;
 }
 
 #index02 {
     border-top: none;
     border-right: none;
     border-top-right-radius: 15%;
+    box-shadow: 0 0 10px 1px black;
 }
 
 #index10 {
     border-left: none;
+    box-shadow: 0 0 10px 1px black;
 }
 
 #index12 {
     border-right: none;
+    box-shadow: 0 0 10px 1px black;
 }
 
 #index20 {
     border-left: none;
     border-bottom: none;
     border-bottom-left-radius: 15%;
+    box-shadow: 0 0 10px 1px black;
 }
 
 #index21 {
     border-bottom: none;
+    box-shadow: 0 0 10px 1px black;
 }
 
 #index22 {
     border-bottom: none;
     border-right: none;
     border-bottom-right-radius: 15%;
+    box-shadow: 0 0 10px 1px black;
 }
