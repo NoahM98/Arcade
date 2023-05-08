@@ -6,6 +6,7 @@
 }
 
 body {
+    color: darkblue;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,8 +38,10 @@ h1 {
 
 button,
 select {
-    border-radius: 15%;
+    border-radius: 10%;
     border: 1px solid black;
+    color: blue;
+    box-shadow: 0 0 10px 1px blue;
 }
 
 #players {
@@ -61,7 +64,7 @@ select {
 }
 
 .highlight {
-    border: 2px solid red;
+    border: 3px solid blue;
 }
 
 #game-over {
@@ -70,11 +73,14 @@ select {
     z-index: 1;
     width: 30vh;
     font-size: 40px;
-    background-color: white;
+    font-weight: bold;
+    background-color: whitesmoke;
     border: solid;
     text-align: center;
     padding: 10px;
-    top: 20vh;
+    top: 50vh;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 1px blue;
 }
 
 #game-board {
@@ -85,15 +91,17 @@ select {
     height: 60vh;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
-    border-radius: 15%;
-    /* box-shadow: 0 0 10px 1px black; */
+    border-radius: 10%;
+    background-color: white;
+    box-shadow: 0 0 10px 1px blue;
 }
 
 .cell {
-    background-color: white;
-    border: solid;
-    font-size: 1000%;
+    border: 3px solid darkblue;
+    color: blue;
+    font-size: 900%;
     font-weight: bold;
+    text-transform: uppercase;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,47 +110,35 @@ select {
 #index00 {
     border-top: none;
     border-left: none;
-    border-top-left-radius: 15%;
-    box-shadow: 0 0 10px 1px black;
 }
 
 #index01 {
     border-top: none;
-    box-shadow: 0 0 10px 1px black;
 }
 
 #index02 {
     border-top: none;
     border-right: none;
-    border-top-right-radius: 15%;
-    box-shadow: 0 0 10px 1px black;
 }
 
 #index10 {
     border-left: none;
-    box-shadow: 0 0 10px 1px black;
 }
 
 #index12 {
     border-right: none;
-    box-shadow: 0 0 10px 1px black;
 }
 
 #index20 {
     border-left: none;
     border-bottom: none;
-    border-bottom-left-radius: 15%;
-    box-shadow: 0 0 10px 1px black;
 }
 
 #index21 {
     border-bottom: none;
-    box-shadow: 0 0 10px 1px black;
 }
 
 #index22 {
     border-bottom: none;
     border-right: none;
-    border-bottom-right-radius: 15%;
-    box-shadow: 0 0 10px 1px black;
 }

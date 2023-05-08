@@ -15,15 +15,11 @@ const playerTwoMancala = document.getElementById('player2-mancala');
 
 function makeCupSquares(x, y) {
     let individuleCup = document.getElementById(`index${x}${y}`);
-    // console.log(individuleCup);
     for (let i = 1; i <= 24; i++) {
-        // for (let j = 0; j < 4; j++) {
         let squareCell = document.createElement('div');
         // squareCell.classList.add('gem');
         squareCell.setAttribute('id', `c${x}${y}${i}`);
-        // console.log(squareCell);
         individuleCup.appendChild(squareCell);
-        // }
     }
 }
 
@@ -37,22 +33,16 @@ function specifyCup() {
 
 function makeMancalaSquares() {
     for (let i = 1; i <= 40; i++) {
-        // for (let j = 0; j < 4; j++) {
         let squareCell = document.createElement('div');
         // squareCell.classList.add('gem');
         squareCell.setAttribute('id', `m1${i}`);
-        // console.log(squareCell);
         playerOneMancala.appendChild(squareCell);
-        // }
     }
     for (let i = 1; i <= 40; i++) {
-        // for (let j = 0; j < 4; j++) {
         let squareCell = document.createElement('div');
         // squareCell.classList.add('gem');
         squareCell.setAttribute('id', `m2${i}`);
-        // console.log(squareCell);
         playerTwoMancala.appendChild(squareCell);
-        // }
     }
 }
 

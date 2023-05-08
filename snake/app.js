@@ -19,7 +19,7 @@ let appleError = false;
 let appleX = state.apple[0];
 let appleY = state.apple[1];
 let highScore = 0;
-let difficulty = 250;
+let difficulty = 200;
 let movement;
 
 const board = document.getElementById('board');
@@ -30,14 +30,11 @@ const scoreDisplay = document.getElementById('score-display');
 const highScoreDisplay = document.getElementById('high-score-display');
 const gameOverPopup = document.getElementById('game-over');
 
-// creating the board
 function makeBoard() {
     for (let i = 0; i < 20; i++) {
-        const row = document.createElement('tr');
-        board.appendChild(row);
         for (let j = 0; j < 20; j++) {
-            let cell = document.createElement('td');
-            row.appendChild(cell);
+            let cell = document.createElement('div');
+            board.appendChild(cell);
             let newId;
             if (i < 10 && j < 10) {
                 newId = 'index' + '0' + i + '0' + j;
@@ -49,7 +46,6 @@ function makeBoard() {
                 newId = 'index' + i + j;
             }
             cell.setAttribute('id', newId);
-            cell.classList.add('cell');
         }
     }
 }
@@ -68,13 +64,14 @@ function newSnakeBody(el, ind) {
     }
     if (!hasReset) {
         snakeCell.classList.add('snakeBody');
-    } else if (hasReset && ind !== snake.body.length - 1) {
+    } else if (hasReset && ind !== snake.body.length - 1 && hasEnded) {
+        snakeCell.classList.remove('snakeBody');
+    } else if (hasReset && !hasEnded) {
         snakeCell.classList.remove('snakeBody');
     }
 }
 
 function renderState(removed) {
-    // show the user the new state
     snake.body.forEach(newSnakeBody);
     if (removed) {
         let oldCell;
@@ -202,42 +199,39 @@ function startGame() {
 startButton.addEventListener('click', startGame);
 
 function resetGame() {
+    clearInterval(movement);
     hasReset = true;
+    renderState(lastRemoved);
     hasStarted = false;
     hasEnded = false;
     hasHitItself = false;
     score = 0;
     scoreDisplay.innerText = `Score: ${score}`;
-    difficulty = 250;
-    clearInterval(movement);
-    snake.body.forEach(newSnakeBody);
     removeAppleClass();
     snake.body = [[10, 5], [10, 6], [10, 7], [10, 8], [10, 9]];
     snake.nextDirection = [0, 1];
     state.apple = [10, 15];
     gameOverPopup.style.display = 'none';
-    gameDifficulty.value = 'easy';
     hasReset = false;
-    renderState(lastRemoved);
+    renderState();
     renderApple();
 }
 resetButton.addEventListener('click', resetGame)
 
 function changeDifficulty(event) {
     if (event.target.value === 'easy') {
-        difficulty = 250;
-    } else if (event.target.value === 'medium') {
         difficulty = 200;
-    } else if (event.target.value === 'hard') {
+    } else if (event.target.value === 'medium') {
         difficulty = 150;
-    } else if (event.target.value === 'expert') {
+    } else if (event.target.value === 'hard') {
         difficulty = 100;
+    } else if (event.target.value === 'expert') {
+        difficulty = 50;
     }
 }
 gameDifficulty.addEventListener('change', changeDifficulty);
 
 function tick() {
-    // this is an incremental change that happens to the state every time you update...
     if (hasStarted && !hasEnded) {
         lastRemoved = moveSnake();
         hasGameEnded();

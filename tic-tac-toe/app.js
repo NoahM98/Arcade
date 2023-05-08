@@ -153,7 +153,6 @@ const startButton = document.getElementById('start');
 startButton.addEventListener('click', onStart);
 
 function onReset() {
-    // have a way to reset when the reset button is clicked
     if (hasStarted) {
         for (let i = 0; i < state.board.length; i++) {
             for (let j = 0; j < state.board[i].length; j++) {
@@ -202,4 +201,4 @@ function onBoardClick(event) {
     }
 }
 const board = document.getElementById('game-board');
-board.addEventListener('click', onBoardClick); // etc
+board.addEventListener('click', onBoardClick);
