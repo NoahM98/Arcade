@@ -1,5 +1,5 @@
 const state = {
-    currentPlayer: 0,
+    currentPlayer: 1,
     board: [
         [4, 4, 4, 4, 4, 4, 0],
         [4, 4, 4, 4, 4, 4, 0]
@@ -16,14 +16,14 @@ const playerTwoMancala = document.getElementById('player2-mancala');
 function makeCupSquares(x, y) {
     let individuleCup = document.getElementById(`index${x}${y}`);
     // console.log(individuleCup);
-    for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 4; j++) {
-            let squareCell = document.createElement('div');
-            // squareCell.classList.add('gem-cell');
-            squareCell.setAttribute('id', `c${x}${y}${i}${j}`);
-            // console.log(squareCell);
-            individuleCup.appendChild(squareCell);
-        }
+    for (let i = 1; i <= 24; i++) {
+        // for (let j = 0; j < 4; j++) {
+        let squareCell = document.createElement('div');
+        // squareCell.classList.add('gem');
+        squareCell.setAttribute('id', `c${x}${y}${i}`);
+        // console.log(squareCell);
+        individuleCup.appendChild(squareCell);
+        // }
     }
 }
 
@@ -35,47 +35,60 @@ function specifyCup() {
     }
 }
 
-specifyCup();
-
 function makeMancalaSquares() {
-    for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 4; j++) {
-            let squareCell = document.createElement('div');
-            // squareCell.classList.add('gem-cell');
-            squareCell.setAttribute('id', `m1${i}${j}`);
-            // console.log(squareCell);
-            playerOneMancala.appendChild(squareCell);
-        }
+    for (let i = 1; i <= 40; i++) {
+        // for (let j = 0; j < 4; j++) {
+        let squareCell = document.createElement('div');
+        // squareCell.classList.add('gem');
+        squareCell.setAttribute('id', `m1${i}`);
+        // console.log(squareCell);
+        playerOneMancala.appendChild(squareCell);
+        // }
     }
-    for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 4; j++) {
-            let squareCell = document.createElement('div');
-            // squareCell.classList.add('gem-cell');
-            squareCell.setAttribute('id', `m2${i}${j}`);
-            // console.log(squareCell);
-            playerTwoMancala.appendChild(squareCell);
+    for (let i = 1; i <= 40; i++) {
+        // for (let j = 0; j < 4; j++) {
+        let squareCell = document.createElement('div');
+        // squareCell.classList.add('gem');
+        squareCell.setAttribute('id', `m2${i}`);
+        // console.log(squareCell);
+        playerTwoMancala.appendChild(squareCell);
+        // }
+    }
+}
+
+function generatePlayer1Gems(el, ind) {
+    for (let i = 1; i <= el; i++) {
+        if (ind !== 6) {
+            let gem = document.getElementById(`c0${ind}${i}`);
+            gem.classList.add('gem');
+        } else {
+            let gem = document.getElementById(`m1${i}`);
+            gem.classList.add('gem');
         }
     }
 }
 
-function supplyGems() {
-    for (let i = 0; i < 2; i++) {
-        for (let j = 0; j < 6; j++) {
-            let gem1 = document.getElementById(`c${i}${j}21`);
-            let gem2 = document.getElementById(`c${i}${j}22`);
-            let gem3 = document.getElementById(`c${i}${j}31`);
-            let gem4 = document.getElementById(`c${i}${j}32`);
-            gem1.classList.add('gem');
-            gem2.classList.add('gem');
-            gem3.classList.add('gem');
-            gem4.classList.add('gem');
+function generatePlayer2Gems(el, ind) {
+    for (let i = 1; i <= el; i++) {
+        if (ind !== 6) {
+            let gem = document.getElementById(`c1${ind}${i}`);
+            gem.classList.add('gem');
+        } else {
+            let gem = document.getElementById(`m2${i}`);
+            gem.classList.add('gem');
         }
     }
+}
+
+function renderGems() {
+    board[0].forEach(generatePlayer1Gems);
+    board[1].forEach(generatePlayer2Gems);
 }
 
 function buildInitialState() {
+    specifyCup();
     makeMancalaSquares();
-    supplyGems();
+    renderGems();
 }
 
 buildInitialState();
