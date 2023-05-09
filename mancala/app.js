@@ -17,7 +17,7 @@ function makeCupSquares(x, y) {
     let individuleCup = document.getElementById(`index${x}${y}`);
     for (let i = 1; i <= 24; i++) {
         let squareCell = document.createElement('div');
-        // squareCell.classList.add('gem');
+        squareCell.classList.add('gem-cell');
         squareCell.setAttribute('id', `c${x}${y}${i}`);
         individuleCup.appendChild(squareCell);
     }
@@ -34,13 +34,13 @@ function specifyCup() {
 function makeMancalaSquares() {
     for (let i = 1; i <= 40; i++) {
         let squareCell = document.createElement('div');
-        // squareCell.classList.add('gem');
+        squareCell.classList.add('gem-cell');
         squareCell.setAttribute('id', `m1${i}`);
         playerOneMancala.appendChild(squareCell);
     }
     for (let i = 1; i <= 40; i++) {
         let squareCell = document.createElement('div');
-        // squareCell.classList.add('gem');
+        squareCell.classList.add('gem-cell');
         squareCell.setAttribute('id', `m2${i}`);
         playerTwoMancala.appendChild(squareCell);
     }
@@ -82,3 +82,23 @@ function buildInitialState() {
 }
 
 buildInitialState();
+
+function updateState(event) {
+    if (event.target.className === 'cup') {
+        let target = event.target.id;
+        console.log(target);
+        let numOfGems = board[target[5]][target[6]];
+        console.log(numOfGems);
+    } else if (event.target.className === 'gem-cell' || event.target.className === 'gem') {
+        let target = event.target.parentElement.id;
+        console.log(target);
+        let numOfGems = board[target[5]][target[6]];
+        console.log(numOfGems);
+    }
+}
+
+function boardClick(event) {
+    updateState(event);
+}
+
+playerCups.addEventListener('click', boardClick);
