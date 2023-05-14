@@ -7,13 +7,30 @@
 }
 
 body {
-    background-color: black;
-    color: white;
+    /* background-color: black; */
+    /* color: white; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     height: 75vh;
+    background: linear-gradient(-45deg, purple, red, green, blue);
+    background-size: 400% 400%;
+    animation: gradient 15s ease-in-out infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 h1 {
@@ -24,6 +41,9 @@ nav {
     font-size: 40px;
     border: 1px solid grey;
     border-radius: 10%;
+    background-color: black;
+    box-shadow: 0 0 10px 5px black;
+    padding: 10px;
 }
 
 li {

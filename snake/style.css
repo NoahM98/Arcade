@@ -9,8 +9,25 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: lightgreen;
-    color: darkgreen;
+    /* background-color: lightgreen; */
+    color: black;
+    background: linear-gradient(-45deg, #004C00, #1E8E1E, #00FF00, #8EFA7D);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 h1 {
@@ -24,9 +41,9 @@ h1 {
     font-size: 20px;
     margin: 10px;
     padding: 10px;
-    border: 1px solid green;
+    border: 1px solid black;
     border-radius: 10%;
-    box-shadow: 0 0 10px 1px darkgreen;
+    box-shadow: 0 0 10px 1px black;
 }
 
 .scores {
@@ -41,19 +58,20 @@ h1 {
     z-index: 1;
     font-size: 50px;
     font-weight: bold;
-    background-color: white;
+    background-color: lightgreen;
+    color: black;
     border: solid;
     text-align: center;
     padding: 20px;
     top: 50vh;
-    box-shadow: 0 0 10px 3px darkgreen;
+    box-shadow: 0 0 10px 5px green;
 }
 
 #board {
     width: 70vh;
     height: 70vh;
     background-color: black;
-    box-shadow: 0 0 10px 3px darkgreen;
+    box-shadow: 0 0 10px 5px black;
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     grid-template-rows: repeat(20, 1fr);

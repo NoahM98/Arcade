@@ -87,13 +87,53 @@ function updateState(event) {
     if (event.target.className === 'cup') {
         let target = event.target.id;
         console.log(target);
-        let numOfGems = board[target[5]][target[6]];
-        console.log(numOfGems);
-    } else if (event.target.className === 'gem-cell' || event.target.className === 'gem') {
+        console.log(board[target[5]][target[6]]);
+        let moveX = parseInt(target[6]) + 1;
+        let moveY = parseInt(target[5]);
+        let currentEl = document.getElementById(target);
+        while (board[target[5]][target[6]] !== 0) {
+            if (moveX > 6 && moveY === 0) {
+                moveX = 0;
+                moveY = 1;
+            } else if (moveX > 6 && moveY === 1) {
+                moveX = 0;
+                moveY = 0;
+            }
+            // console.log(moveX);
+            // console.log(moveY);
+            board[moveY][moveX]++
+            moveX++;
+            let gemToRemove = currentEl.getElementsByClassName('gem')[board[target[5]][target[6]] - 1];
+            // console.log(gemToRemove);
+            gemToRemove.classList.remove('gem');
+            board[target[5]][target[6]]--;
+            renderGems();
+        }
+    } else if (event.target.className === 'gem-cell' || event.target.className === 'gem-cell gem') {
         let target = event.target.parentElement.id;
         console.log(target);
-        let numOfGems = board[target[5]][target[6]];
-        console.log(numOfGems);
+        console.log(board[target[5]][target[6]]);
+        let moveX = parseInt(target[6]) + 1;
+        let moveY = parseInt(target[5]);
+        let currentEl = document.getElementById(target);
+        while (board[target[5]][target[6]] !== 0) {
+            if (moveX > 6 && moveY === 0) {
+                moveX = 0;
+                moveY = 1;
+            } else if (moveX > 6 && moveY === 1) {
+                moveX = 0;
+                moveY = 0;
+            }
+            // console.log(moveX);
+            // console.log(moveY);
+            board[moveY][moveX]++
+            moveX++;
+            let gemToRemove = currentEl.getElementsByClassName('gem')[board[target[5]][target[6]] - 1];
+            // console.log(gemToRemove);
+            gemToRemove.classList.remove('gem');
+            board[target[5]][target[6]]--;
+            renderGems();
+        }
     }
 }
 

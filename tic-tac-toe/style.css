@@ -3,14 +3,31 @@
     padding: 0;
     box-sizing: border-box;
     font-family: monospace;
+    color: navy;
 }
 
 body {
-    color: darkblue;
+    /* color: darkblue; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: skyblue;
+    background: linear-gradient(-45deg, #112187, #1534FF, #0091FF, #71C3FA);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 h1 {
@@ -39,9 +56,10 @@ h1 {
 button,
 select {
     border-radius: 10%;
-    border: 1px solid black;
-    color: blue;
-    box-shadow: 0 0 10px 1px blue;
+    border: 1px solid midnightblue;
+    color: midnightblue;
+    box-shadow: 0 0 10px 2px midnightblue;
+    background-color: #E9E9E9;
 }
 
 #players {
@@ -64,7 +82,7 @@ select {
 }
 
 .highlight {
-    border: 3px solid blue;
+    border: 3px solid #E9E9E9;
 }
 
 #game-over {
@@ -74,13 +92,13 @@ select {
     width: 30vh;
     font-size: 40px;
     font-weight: bold;
-    background-color: whitesmoke;
+    background-color: #E9E9E9;
     border: solid;
     text-align: center;
     padding: 10px;
     top: 50vh;
     border-radius: 10px;
-    box-shadow: 0 0 10px 1px blue;
+    box-shadow: 0 0 10px 1px midnightblue;
 }
 
 #game-board {
@@ -92,13 +110,13 @@ select {
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     border-radius: 10%;
-    background-color: white;
-    box-shadow: 0 0 10px 1px blue;
+    background-color: #E9E9E9;
+    box-shadow: 0 0 10px 5px midnightblue;
 }
 
 .cell {
-    border: 3px solid darkblue;
-    color: blue;
+    border: 3px solid midnightblue;
+    color: midnightblue;
     font-size: 900%;
     font-weight: bold;
     text-transform: uppercase;
